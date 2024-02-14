@@ -12,7 +12,7 @@ const hat = require('hat');
 export class AppService {
 
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, 
-  @Inject('COMMUNICATION') private readonly communicationClient : ClientProxy,
+  @Inject('COMMUNICATION_SERVICE') private readonly communicationClient : ClientProxy,
   ) {}
   
  
@@ -27,7 +27,7 @@ export class AppService {
     const result = await this.userModel.create({ ...user, token: hat() }) 
     
     
-     this.communicationClient.emit ('user created', result);
+     this.communicationClient.emit ('user_created', result);
     
      return(result);
   }

@@ -19,16 +19,15 @@ require('dotenv').config();
       {
         name: 'COMMUNICATION_SERVICE',
         transport :Transport.TCP,
-        options: {
-          host: 'localhost',
-          port: 3001
+        options:{
+          port : 3001
         }
+       
       },
       {
         name: 'STAT_SERVICE',
         transport :Transport.TCP,
-        options: {
-          host: 'localhost',
+        options: {   
           port: 3002
         }
       }
