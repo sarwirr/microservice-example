@@ -11,8 +11,9 @@ const hat = require('hat');
 @Injectable()
 export class AppService {
 
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, 
+  constructor(@InjectModel(User.name) private userRepository: Model<UserDocument>, 
   @Inject('COMMUNICATION_SERVICE') private readonly communicationClient : ClientProxy,
+  @Inject ('STAT_SERVICE') private readonly analyticClient : ClientProxy
   ) {}
   
  
@@ -24,16 +25,16 @@ export class AppService {
     }
     const saltOrRounds = 10;
     user.password = await bcrypt.hash(user.password , saltOrRounds);
-    const result = await this.userModel.create({ ...user, token: hat() }) 
-    
-    
-     this.communicationClient.emit ('user_created', result);
+    const result = await this.userRepository.create({ ...user, token: hat() })
+
+    this.communicationClient.emit ('user_created', result);
+    this.analyticClient.emit('user_created' , result);
     
      return(result);
   }
 
   async findOne(email: string): Promise<User> {
-    return this.userModel.findOne({ email: email }).select('-password');
+    return this.userRepository.findOne({ email: email }).select('-password');
   }
 
 

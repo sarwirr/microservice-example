@@ -23,6 +23,15 @@ export class User {
     @Prop()
     age: number
 
+    @Prop(
+        {
+            type: Date,
+            default: Date.now
+        }
+    )
+    date: Date
+
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
