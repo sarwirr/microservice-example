@@ -29,6 +29,7 @@ require('dotenv').config();
         name: 'STAT_SERVICE',
         transport :Transport.TCP,
         options: {   
+          host : 'analytics-api',
           port: 3002
         }
       }
