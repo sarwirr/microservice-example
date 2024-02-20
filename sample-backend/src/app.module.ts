@@ -20,6 +20,7 @@ require('dotenv').config();
         name: 'COMMUNICATION_SERVICE',
         transport :Transport.TCP,
         options:{
+          host : 'communication-api',
           port : 3001
         }
        

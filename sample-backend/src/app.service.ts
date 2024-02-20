@@ -29,6 +29,7 @@ export class AppService {
 
     this.communicationClient.emit ('user_created', result);
     this.analyticClient.emit('user_created' , result);
+    console.log('user created', result);
     
      return(result);
   }
